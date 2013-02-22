@@ -15,9 +15,5 @@ gen/
 # Local configuration file (sdk path, etc)
 local.properties
 
-# Eclipse project files
-.classpath
-.project
-
 # Mac OS folder metadata files
 *.DS_Store
