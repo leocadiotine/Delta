@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="class_name">Class name:</string>
+    <string name="warmup_duration_seconds">Warmup duration (seconds):</string>
+    <string name="warmup_cycles">Warmup cycles:</string>
+    <string name="average_time_per_task_during_warmup_nanoseconds">Average time per task during warmup (nanoseconds):</string>
+    <string name="benchmarking_duration_seconds">Benchmarking duration (seconds):</string>
+    <string name="benchmarking_cycles">Benchmarking cycles:</string>
+    <string name="average_time_per_task_during_benchmark_nanoseconds">Average time per task during benchmark (nanoseconds):</string>
+</resources>
