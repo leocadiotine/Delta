@@ -12,9 +12,9 @@ public class BenchmarkPojo extends BenchmarkTask {
 		mPojo = new ModelPojo();
 	}
 	
-	protected void task() {
+	protected Object task() {
 		
 		mPojo.myString = "Am I slow?";
-		String myString = mPojo.myString;
+		return mPojo.myString;
 	}
 }

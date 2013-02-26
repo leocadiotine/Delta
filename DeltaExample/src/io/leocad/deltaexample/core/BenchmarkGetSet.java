@@ -12,9 +12,9 @@ public class BenchmarkGetSet extends BenchmarkTask {
 		mGetSet = new ModelGetSet();
 	}
 	
-	protected void task() {
+	protected Object task() {
 		
 		mGetSet.setMyString("Am I slow?");
-		String myString = mGetSet.getMyString();
+		return mGetSet.getMyString();
 	}
 }
