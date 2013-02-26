@@ -4,10 +4,13 @@ import android.app.Activity;
 
 public abstract class Delta {
 
+	public abstract void onPreExecute();
 	public abstract void onPostExecute();
 
 	public void benchmark(final Activity activity, final Class<? extends BenchmarkTask> classType, final long numCycles) {
 
+		onPreExecute();
+		
 		new Thread() {
 			@Override
 			public void run() {
