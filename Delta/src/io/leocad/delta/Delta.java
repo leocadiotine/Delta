@@ -5,7 +5,9 @@ import android.app.Activity;
 public abstract class Delta {
 
 	public abstract void onPreExecute();
-	public abstract void onPostExecute();
+	public abstract void onPostExecute(BenchmarkResult result);
+	
+	private BenchmarkResult mResult;
 
 	public void benchmark(final Activity activity, final Class<? extends BenchmarkTask> classType, final long numCycles) {
 
@@ -17,7 +19,7 @@ public abstract class Delta {
 
 				try {
 					BenchmarkTask taskInstance = classType.newInstance();
-					taskInstance.execute(numCycles);
+					mResult = taskInstance.execute(numCycles);
 					
 				} catch (InstantiationException e) {
 					e.printStackTrace();
@@ -30,7 +32,8 @@ public abstract class Delta {
 						
 						@Override
 						public void run() {
-							onPostExecute();
+							onPostExecute(mResult);
+							mResult = null; //Release
 						}
 					});
 				}

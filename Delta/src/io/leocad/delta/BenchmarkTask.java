@@ -30,10 +30,13 @@ public abstract class BenchmarkTask {
 		onPostExecute();
 	}
 	
-	public void execute(long numCycles) {
+	BenchmarkResult execute(long numCycles) {
 		
-		Log.i(TAG, "----------------------------------------------------------");
-		Log.i(TAG, String.format("Starting benchmark. Class name: %s", getClass().getSimpleName()));
+		BenchmarkResult result = new BenchmarkResult();
+		result.className = getClass().getSimpleName();
+		
+		Log.v(TAG, "----------------------------------------------------------");
+		Log.v(TAG, String.format("Starting benchmark. Class name: %s", result.className));
 		
 		long numWarmupCycles = 1000000L;
 		
@@ -44,9 +47,12 @@ public abstract class BenchmarkTask {
 		double elapsedTime = endTime - startTime;
 		double avgTimePerTask = (double) elapsedTime / numWarmupCycles;
 		
-		Log.i(TAG, "-");
-		Log.i(TAG, String.format("Warmup duration: %f seconds. Cycles: %s", elapsedTime / 1e9, NUM_CYCLES_FORMATTER.format(numWarmupCycles)) );
-		Log.i(TAG, String.format("Average time per task during warmup: %f nanoseconds", avgTimePerTask) );
+		result.warmupDurationSecs = elapsedTime / 1e9;
+		result.warmupCycles = numWarmupCycles;
+		result.warmupAvgTaskTimeNs = avgTimePerTask;
+		Log.v(TAG, "-");
+		Log.v(TAG, String.format("Warmup duration: %f seconds. Cycles: %s", result.warmupDurationSecs, NUM_CYCLES_FORMATTER.format(numWarmupCycles)) );
+		Log.v(TAG, String.format("Average time per task during warmup: %f nanoseconds", avgTimePerTask) );
 		
 		startTime = System.nanoTime();
 		doExecution(numCycles);
@@ -55,9 +61,14 @@ public abstract class BenchmarkTask {
 		elapsedTime = endTime - startTime;
 		avgTimePerTask = (double) elapsedTime / numCycles;
 		
-		Log.i(TAG, "-");
-		Log.i(TAG, String.format("Benchmarking duration: %f seconds. Cycles: %s", elapsedTime / 1e9, NUM_CYCLES_FORMATTER.format(numCycles)) );
-		Log.i(TAG, String.format("Average time per task during benchmarking: %f nanoseconds", avgTimePerTask) );
-		Log.i(TAG, "----------------------------------------------------------");
+		result.benchmarkDurationSecs = elapsedTime / 1e9;
+		result.benchmarkCycles = numCycles;
+		result.benchmarkAvgTaskTimeNs = avgTimePerTask;
+		Log.v(TAG, "-");
+		Log.v(TAG, String.format("Benchmarking duration: %f seconds. Cycles: %s", result.benchmarkDurationSecs, NUM_CYCLES_FORMATTER.format(numCycles)) );
+		Log.v(TAG, String.format("Average time per task during benchmarking: %f nanoseconds", avgTimePerTask) );
+		Log.v(TAG, "----------------------------------------------------------");
+		
+		return result;
 	}
 }
