@@ -4,7 +4,9 @@ import android.app.Activity;
 
 public abstract class Delta {
 
-	public abstract void onPreExecute();
+	public void onPreExecute() {
+		//Override me
+	}
 	public abstract void onPostExecute(BenchmarkResult result);
 	
 	private BenchmarkResult mResult;
