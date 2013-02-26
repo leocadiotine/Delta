@@ -14,7 +14,7 @@ public abstract class BenchmarkTask {
 	protected void onPreExecute() {
 		// Override me
 	}
-	protected abstract void task();
+	protected abstract Object task();
 	protected void onPostExecute() {
 		// Override me
 	}
