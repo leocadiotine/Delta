@@ -5,16 +5,17 @@ import io.leocad.delta.BenchmarkTask;
 
 public class BenchmarkPojo extends BenchmarkTask {
 	
-	private ModelPojo mPojo;
+	private ModelPojo mModel;
 	
 	@Override
 	protected void onPreExecute() {
-		mPojo = new ModelPojo();
+		mModel = new ModelPojo();
 	}
 	
 	protected Object task() {
 		
-		mPojo.myString = "Am I slow?";
-		return mPojo.myString;
+		ModelPojo model = mModel;
+		model.myString = "Am I slow?";
+		return model.myString;
 	}
 }

@@ -5,16 +5,25 @@ import io.leocad.delta.BenchmarkTask;
 
 public class BenchmarkGetSet extends BenchmarkTask {
 	
-	private ModelGetSet mGetSet;
+	private ModelGetSet mModel;
 	
+	public ModelGetSet getModel() {
+		return mModel;
+	}
+
+	public void setModel(ModelGetSet model) {
+		this.mModel = model;
+	}
+
 	@Override
 	protected void onPreExecute() {
-		mGetSet = new ModelGetSet();
+		setModel( new ModelGetSet() );
 	}
 	
 	protected Object task() {
 		
-		mGetSet.setMyString("Am I slow?");
-		return mGetSet.getMyString();
+		ModelGetSet model = getModel();
+		model.setMyString("Am I slow?");
+		return model.getMyString();
 	}
 }
