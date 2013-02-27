@@ -4,7 +4,7 @@
 
 Microbenchmarking framework for Android.
 
-##<a id="current_version" /></a>Current version
+##Current version
 1.0.1 (20130226). Download the binary here: [delta-1.1.jar](https://dl.dropbox.com/u/5135185/blog/delta-1.1.jar).
 
 ##Purpose
@@ -84,4 +84,4 @@ If you use this code, I'd appreciate you refer my name (Leocadio Tiné) and the 
 ##Suggestions? Comments?
 Pull requests are always welcome. So are donations :)
 
-To find me, buzz at `me[at]leocad.io` or [follow me on Twitter](www.twitter.com/leocadiotine). To read interesting stuff, go to [my blog](blog.leocad.io).
+To find me, buzz at `me[at]leocad.io` or [follow me on Twitter](http://www.twitter.com/leocadiotine). To read interesting stuff, go to [my blog](blog.leocad.io).
