@@ -1,6 +1,8 @@
 package io.leocad.delta;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 
 public abstract class Delta {
 
@@ -8,13 +10,15 @@ public abstract class Delta {
 		//Override me
 	}
 	public abstract void onPostExecute(BenchmarkResult result);
-	
+
 	private BenchmarkResult mResult;
 
 	public void benchmark(final Activity activity, final Class<? extends BenchmarkTask> classType, final long numCycles) {
 
+		lockOrientationChanges(activity);
+
 		onPreExecute();
-		
+
 		new Thread() {
 			@Override
 			public void run() {
@@ -22,16 +26,16 @@ public abstract class Delta {
 				try {
 					BenchmarkTask taskInstance = classType.newInstance();
 					mResult = taskInstance.execute(numCycles);
-					
+
 				} catch (InstantiationException e) {
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {
 					e.printStackTrace();
-				
+
 				} finally {
-					
+
 					activity.runOnUiThread(new Runnable() {
-						
+
 						@Override
 						public void run() {
 							onPostExecute(mResult);
@@ -41,5 +45,16 @@ public abstract class Delta {
 				}
 			};
 		}.start();
+	}
+
+	private void lockOrientationChanges(Activity activity) {
+		//Lock orientation changes, to avoid the benchmark to start over if the device rotates
+		int activityCurrentOrientation = activity.getResources().getConfiguration().orientation;
+		
+		if (activityCurrentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+			activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		} else {
+			activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+		}
 	}
 }
