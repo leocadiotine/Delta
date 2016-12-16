@@ -1,11 +1,11 @@
 #Delta
 
-![Delta logo](https://dl.dropbox.com/u/5135185/blog/delta-icon.png)
+![Delta logo](http://static.leocad.io/delta-icon.png)
 
 Microbenchmarking framework for Android.
 
 ##Current version
-1.2 (20130227). Download the binary here: [delta-1.2.jar](https://dl.dropbox.com/u/5135185/blog/delta-1.2.jar).
+1.2 (20130227). Download the binary here: [delta-1.2.jar](http://static.leocad.io/delta-1.2.jar).
 
 ##Purpose
 Microbenchmarking is "attempting to measure the performance of a small piece of code". If you want to know whether is faster to use a "getter" rather than access the field directly, or if it's better to run a for loop backwards instead of forwards, then you should do a microbenchmark. Interesting information can be found [here](https://code.google.com/p/caliper/wiki/JavaMicrobenchmarks).
