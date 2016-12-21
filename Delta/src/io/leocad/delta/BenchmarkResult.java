@@ -1,6 +1,6 @@
 package io.leocad.delta;
 
-public class BenchmarkResult {
+public class BenchmarkResult<T> {
 
 	public String className;
 	
@@ -12,4 +12,5 @@ public class BenchmarkResult {
 	public long benchmarkCycles;
 	public double benchmarkAvgTaskTimeNs;
 	
+	public T lastResult;
 }

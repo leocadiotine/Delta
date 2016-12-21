@@ -5,16 +5,18 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.view.WindowManager;
 
-public abstract class Delta {
+public class Delta<T> {
 	
-	private BenchmarkResult mResult;
+	private BenchmarkResult<T> mResult;
 
 	public void onPreExecute() {
 		//Override me
 	}
-	public abstract void onPostExecute(BenchmarkResult result);
+	public void onPostExecute(BenchmarkResult<T> result) {
+		//Override me
+	}
 
-	public void benchmark(final Activity activity, final Class<? extends BenchmarkTask> classType, final long numCycles) {
+	public void benchmark(final Activity activity, final Class<? extends BenchmarkTask<T>> classType, final long numCycles, final long numWarmupCycles) {
 
 		lockOrientationChanges(activity);
 		activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -26,8 +28,8 @@ public abstract class Delta {
 			public void run() {
 
 				try {
-					BenchmarkTask taskInstance = classType.newInstance();
-					mResult = taskInstance.execute(numCycles);
+					BenchmarkTask<T> taskInstance = classType.newInstance();
+					mResult = taskInstance.execute(numCycles, numWarmupCycles);
 
 				} catch (InstantiationException e) {
 					e.printStackTrace();
